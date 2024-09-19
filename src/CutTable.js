@@ -1,4 +1,4 @@
-// CutTable.js
+
 import React from 'react';
 
 function CutTable({ cuts, onEdit, onDelete }) {

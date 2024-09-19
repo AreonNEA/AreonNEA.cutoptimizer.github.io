@@ -1,5 +1,5 @@
-// CutInput.js
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { removeCut } from './BoardDisplay';
 
 function CutInput({ onAdd }) {
   const [height, setHeight] = useState('');

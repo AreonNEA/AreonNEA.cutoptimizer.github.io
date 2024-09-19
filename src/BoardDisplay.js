@@ -1,26 +1,64 @@
-// BoardDisplay.js
-import React from 'react';
 import './BoardDisplay.css';
 
-function BoardDisplay({ boards, boardWidth, boardHeight }) {
+ 
+export function removeCut(boards, setBoards) {
+  console.log('Boards before removing:', boards);
+  
+ 
+  const lastBoardIndex = boards.slice().reverse().findIndex(board => board.cuts.length > 0);
+  
+  if (lastBoardIndex === -1) {
+    console.log('No boards with cuts found');
+    return;
+  }
+ 
+  const originalIndex = boards.length - 1 - lastBoardIndex;
+  console.log('Original last board index:', originalIndex);
+  
+ 
+  const updatedBoards = boards.map((board, bIndex) => {
+    if (bIndex === originalIndex) {
+ 
+      const updatedCuts = board.cuts.slice(0, -1);
+
+ 
+      if (updatedCuts.length === 0) {
+        return null;
+      }
+
+      return {
+        ...board,
+        cuts: updatedCuts,
+      };
+    }
+    return board;
+  }).filter(board => board !== null);  
+
+  console.log('Updated boards:', updatedBoards);
+  setBoards(updatedBoards);
+}
+
+function BoardDisplay({ boards, setBoards, boardWidth, boardHeight }) {
   return (
     <div className='tablePosition'>
       {boards.map((board, boardIndex) => (
-        <div key={boardIndex} className='center' style={{margin: "0 auto"}}>
+        <div key={boardIndex} className='center' style={{ margin: "0 auto" }}>
           <h3>Доска {boardIndex + 1}</h3>
-          <div style={{ position: 'relative', width: `${boardWidth / 10}px`, height: `${boardHeight / 10}px`, border: '1px solid black',margin:"10px"}}>
-            {board.cuts.map((cut, index) => (
-              <div key={index} style={{
-                position: 'absolute',
-                left: `${cut.x / 10}px`,
-                top: `${cut.y / 10}px`,
-                width: `${cut.width / 10}px`,
-                height: `${cut.height / 10}px`,
-                backgroundColor: getRandomColor(),
-                border: '1px solid red'
-                
-              }}>
-              </div>
+          <div style={{ position: 'relative', width: `${boardWidth / 10}px`, height: `${boardHeight / 10}px`, border: '1px solid black', margin: "10px" }}>
+            {board.cuts.map((cut, cutIndex) => (
+              <div
+                onClick={() => removeCut(boards, setBoards)}
+                key={cutIndex}
+                style={{
+                  position: 'absolute',
+                  left: `${cut.x / 10}px`,
+                  top: `${cut.y / 10}px`,
+                  width: `${cut.width / 10}px`,
+                  height: `${cut.height / 10}px`,
+                  backgroundColor: getRandomColor(),
+                  border: '1px solid black'
+                }}
+              />
             ))}
           </div>
         </div>

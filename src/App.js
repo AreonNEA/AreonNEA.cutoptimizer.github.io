@@ -1,4 +1,4 @@
-// App.js
+ 
 import React, { useState } from 'react';
 import CutInput from './CutInput';
 import CutTable from './CutTable';
@@ -99,7 +99,9 @@ function App() {
       <CutInput onAdd={addCut} />
       <CutTable cuts={cuts} onEdit={editCut} onDelete={deleteCut} />
       <button onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
-      <BoardDisplay boards={boards} boardWidth={boardWidth} boardHeight={boardHeight} />
+      <BoardDisplay boards={boards} setBoards={setBoards} boardWidth={boardWidth} boardHeight={boardHeight} />
+
+
     </div>
   );
 }
