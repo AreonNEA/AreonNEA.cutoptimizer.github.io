@@ -25,7 +25,6 @@ function App() {
   };
 
   const placeCutsOnBoards = () => {
- 
     const sortedCuts = [...cuts].sort((a, b) => (b.width * b.height) - (a.width * a.height));
   
     const newBoards = [];
@@ -44,7 +43,6 @@ function App() {
   
     setBoards(newBoards);
   };
-  
 
   const createNewBoard = () => {
     return {
@@ -97,7 +95,7 @@ function App() {
   return (
     <div className='table'>
       <h1>Оптимизатор раскроя</h1>
-      <CutInput onAdd={addCut} />
+      <CutInput onAdd={addCut} boardWidth={boardWidth} boardHeight={boardHeight} />
       <CutTable cuts={cuts} onEdit={editCut} onDelete={deleteCut} />
       <button onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
       <BoardDisplay boards={boards} setBoards={setBoards} boardWidth={boardWidth} boardHeight={boardHeight} />

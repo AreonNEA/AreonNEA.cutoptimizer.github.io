@@ -1,17 +1,31 @@
 import { useState } from 'react';
-import { removeCut } from './BoardDisplay';
 
-function CutInput({ onAdd }) {
+function CutInput({ onAdd, boardWidth, boardHeight }) {
   const [height, setHeight] = useState('');
   const [width, setWidth] = useState('');
   const [quantity, setQuantity] = useState('');
 
   const handleAdd = () => {
-    if (isNaN(height) || isNaN(width) || isNaN(quantity) || height <= 0 || width <= 0 || quantity <= 0) {
+    const parsedHeight = parseInt(height);
+    const parsedWidth = parseInt(width);
+    const parsedQuantity = parseInt(quantity);
+
+    if (isNaN(parsedHeight) || isNaN(parsedWidth) || isNaN(parsedQuantity) || 
+        parsedHeight <= 0 || parsedWidth <= 0 || parsedQuantity <= 0) {
       alert('Введите корректные значения');
       return;
     }
-    onAdd({ height: parseInt(height), width: parseInt(width), quantity: parseInt(quantity) });
+
+  
+    if (parsedHeight > boardHeight || parsedWidth > boardWidth) {
+      alert(`Размеры реза превышают размер доски (${boardWidth}x${boardHeight}).`);
+      return;
+    }
+
+   
+    onAdd({ height: parsedHeight, width: parsedWidth, quantity: parsedQuantity });
+
+ 
     setHeight('');
     setWidth('');
     setQuantity('');

@@ -3,33 +3,27 @@ import './BoardDisplay.css';
 export function removeCut(boards, setBoards, cutToRemove) {
   console.log('Boards before removing:', boards);
 
- 
-  const lastBoardIndex = boards.slice().reverse().findIndex(board => board.cuts.length > 0);
+  const updatedBoards = boards.map(board => {
+    const updatedCuts = [...board.cuts];
+    const cutIndex = updatedCuts
+      .slice() 
+      .reverse() 
+      .findIndex(cut => cut.width === cutToRemove.width && cut.height === cutToRemove.height);
 
-  if (lastBoardIndex === -1) {
-    console.log('No boards with cuts found');
-    return;
-  }
-
-  const originalIndex = boards.length - 1 - lastBoardIndex;
-  console.log('Original last board index:', originalIndex);
-
-  const updatedBoards = boards.map((board, bIndex) => {
-    if (bIndex === originalIndex) {
+    if (cutIndex !== -1) {
      
-      const updatedCuts = board.cuts.slice(0, -1);
-
-      if (updatedCuts.length === 0) {
-        return null;
-      }
-
-      return {
-        ...board,
-        cuts: updatedCuts
-      };
+      updatedCuts.splice(updatedCuts.length - 1 - cutIndex, 1);
     }
-    return board;
-  }).filter(board => board !== null);  // Удаляем пустые доски
+
+    if (updatedCuts.length === 0) {
+      return null;
+    }
+
+    return {
+      ...board,
+      cuts: updatedCuts
+    };
+  }).filter(board => board !== null); 
 
   console.log('Updated boards:', updatedBoards);
   setBoards(updatedBoards);
@@ -41,7 +35,15 @@ function BoardDisplay({ boards, setBoards, boardWidth, boardHeight }) {
       {boards.map((board, boardIndex) => (
         <div key={boardIndex} className='center' style={{ margin: "0 auto" }}>
           <h3>Доска {boardIndex + 1}</h3>
-          <div style={{ position: 'relative', width: `${boardWidth / 10}px`, height: `${boardHeight / 10}px`, border: '1px solid black', margin: "10px" }}>
+          <div
+            style={{
+              position: 'relative',
+              width: `${boardWidth / 10}px`,
+              height: `${boardHeight / 10}px`,
+              border: '1px solid black',
+              margin: "10px"
+            }}
+          >
             {board.cuts.map((cut, cutIndex) => (
               <div
                 onClick={() => removeCut(boards, setBoards, cut)}
