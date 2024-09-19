@@ -1,0 +1,12 @@
+.tablePosition {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: white;
+  margin-top: 10px;
+}
+
+h3 {
+  display: flex;
+  justify-content: center;
+  color: blue;
+}
