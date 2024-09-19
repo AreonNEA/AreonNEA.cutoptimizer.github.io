@@ -1,17 +1,14 @@
- 
 import React, { useState } from 'react';
 import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
-import  './App.css';
-
-
+import './App.css';
 
 function App() {
   const [cuts, setCuts] = useState([]);
   const [boards, setBoards] = useState([]);
-  const boardWidth =  3630;
-  const boardHeight =  1830;
+  const boardWidth = 3630;
+  const boardHeight = 1830;
 
   const addCut = (cut) => {
     setCuts([...cuts, cut]);
@@ -28,11 +25,14 @@ function App() {
   };
 
   const placeCutsOnBoards = () => {
+ 
+    const sortedCuts = [...cuts].sort((a, b) => (b.width * b.height) - (a.width * a.height));
+  
     const newBoards = [];
     let currentBoard = createNewBoard();
     newBoards.push(currentBoard);
-
-    cuts.forEach(cut => {
+  
+    sortedCuts.forEach(cut => {
       for (let i = 0; i < cut.quantity; i++) {
         if (!placeCutOnBoard(currentBoard, cut)) {
           currentBoard = createNewBoard();
@@ -41,9 +41,10 @@ function App() {
         }
       }
     });
-
+  
     setBoards(newBoards);
   };
+  
 
   const createNewBoard = () => {
     return {
@@ -100,8 +101,6 @@ function App() {
       <CutTable cuts={cuts} onEdit={editCut} onDelete={deleteCut} />
       <button onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
       <BoardDisplay boards={boards} setBoards={setBoards} boardWidth={boardWidth} boardHeight={boardHeight} />
-
-
     </div>
   );
 }
