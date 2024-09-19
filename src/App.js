@@ -10,8 +10,8 @@ import  './App.css';
 function App() {
   const [cuts, setCuts] = useState([]);
   const [boards, setBoards] = useState([]);
-  const boardWidth = 1830;
-  const boardHeight = 3630;
+  const boardWidth =  3630;
+  const boardHeight =  1830;
 
   const addCut = (cut) => {
     setCuts([...cuts, cut]);
