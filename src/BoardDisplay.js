@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
 
-function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount, totalCuts, setTotalCuts }) {
+function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount, totalCuts, setTotalCuts, translations }) {
   const handleRemoveBoard = (boardIndex) => {
     const updatedBoards = boards.filter((_, index) => index !== boardIndex);
     setBoards(updatedBoards);
@@ -14,16 +14,15 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
   return (
     <div className={styles.tablePosition}>
       <div className={styles.parameters}>
-        <h2>Размеры листа (мм): {boardHeight} x {boardWidth}</h2>
-        <h3>Параметры раскроя:</h3>
-        <p>Листов в раскрое: {boardCount}</p>
-        <p>Всего деталей: {totalCuts ?  totalCuts : 0}</p>
+        <h2>{translations.boardSize}: {boardHeight} x {boardWidth}</h2>
+        <h3>{translations.calculate}:</h3>
+        <p>{translations.board}: {boardCount}</p>
+        <p>{translations.totalCuts}: {totalCuts ? totalCuts : 0}</p>
       </div>
       {boards.map((board, boardIndex) => (
         <div key={boardIndex} className={styles.center} style={{ position: 'relative', marginBottom: '20px' }}>
-
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <h3>Доска {boardIndex + 1}</h3>
+            <h3>{translations.board} {boardIndex + 1}</h3>
             <button
               onClick={() => handleRemoveBoard(boardIndex)}
               style={{
@@ -36,7 +35,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                 margin: "auto 10px"
               }}
             >
-              Удалить
+              {translations.remove}  
             </button>
           </div>
           <div 

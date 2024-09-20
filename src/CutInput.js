@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardHeight }) {
+function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardHeight, translations }) {
   const [quantity, setQuantity] = useState(1);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -40,23 +40,25 @@ function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardH
     <div>
       <input
         type="number"
-        placeholder="Ширина"
+        placeholder={translations.width}  
         value={width}
         onChange={e => setWidth(e.target.value)}
       />
       <input
         type="number"
-        placeholder="Высота"
+        placeholder={translations.height}  
         value={height}
         onChange={e => setHeight(e.target.value)}
       />
       <input
         type="number"
-        placeholder="Количество"
+        placeholder={translations.quantity} 
         value={quantity}
         onChange={e => setQuantity(e.target.value)}
       />
-      <button onClick={handleAddCut}>{currentCut ? "Обновить" : "Добавить рез"}</button>
+      <button onClick={handleAddCut}>
+        {currentCut ? translations.update : translations.add}  
+      </button>
     </div>
   );
 }
