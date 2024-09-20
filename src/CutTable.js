@@ -18,6 +18,7 @@ function CutTable({ cuts, onEdit, onDelete }) {
             <td>{cut.width}</td>
             <td>{cut.quantity}</td>
             <td>
+              <button onClick={() => onEdit({ ...cut, index })}>Изменить</button>
               <button onClick={() => onDelete(index)}>Удалить</button>
             </td>
           </tr>

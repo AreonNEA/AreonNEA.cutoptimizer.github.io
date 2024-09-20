@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-function CutInput({ onAdd, boardWidth, boardHeight }) {
+function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardHeight }) {
   const [quantity, setQuantity] = useState(1);
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (currentCut) {
+      setWidth(currentCut.width);
+      setHeight(currentCut.height);
+      setQuantity(currentCut.quantity);
+    } else {
+      setWidth(0);
+      setHeight(0);
+      setQuantity(1);
+    }
+  }, [currentCut]);
 
   const handleAddCut = () => {
     const cut = {
@@ -11,10 +23,17 @@ function CutInput({ onAdd, boardWidth, boardHeight }) {
       height: parseInt(height),
       quantity: parseInt(quantity),
     };
-    onAdd(cut);
+
+    if (currentCut) {
+      onEdit(currentCut.index, cut);
+      setCurrentCut(null);  
+    } else {
+      onAdd(cut);
+    }
+
     setWidth(0);
     setHeight(0);
-    setQuantity(1); 
+    setQuantity(1);
   };
 
   return (
@@ -37,7 +56,7 @@ function CutInput({ onAdd, boardWidth, boardHeight }) {
         value={quantity}
         onChange={e => setQuantity(e.target.value)}
       />
-      <button onClick={handleAddCut}>Добавить рез</button>
+      <button onClick={handleAddCut}>{currentCut ? "Обновить" : "Добавить рез"}</button>
     </div>
   );
 }
