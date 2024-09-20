@@ -44,6 +44,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
               height: `${boardHeight / scaleFactor}px`,  
               border: '1px solid black',
               backgroundImage: `url(${selectedImage})`,
+              backgroundPosition: 'center',
               backgroundSize: 'cover',
               position: 'relative',
             }}
@@ -57,6 +58,10 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                   e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
                   e.currentTarget.style.backgroundSize = 'cover';
                   e.currentTarget.style.border = '2px solid green';
+                  e.currentTarget.style.backgroundSize = '50px 50px'; 
+
+                  e.currentTarget.style.backgroundRepeat = 'no-repeat';
+                  e.currentTarget.style.backgroundPosition = 'center';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundImage = 'none';

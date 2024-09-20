@@ -3,9 +3,9 @@ import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
-import MobileView from './MobileView';  
+import MobileView from './MobileView';
 import styles from './App.module.css';
-import { translations } from './translations'; 
+import { translations } from './translations';
 
 function App() {
   const [cuts, setCuts] = useState([]);
@@ -14,7 +14,7 @@ function App() {
   const [boardCount, setBoardCount] = useState(0);
   const [totalCuts, setTotalCuts] = useState(0);
   const [currentCut, setCurrentCut] = useState(null);
-  const [language, setLanguage] = useState('en');  
+  const [language, setLanguage] = useState('en');
   const boardWidth = 3630;
   const boardHeight = 1830;
 
@@ -122,47 +122,54 @@ function App() {
         <MobileView />
       ) : (
         <div>
-          <h1>{translations[language].calculate}</h1>
-          <select value={language} onChange={(e) => setLanguage(e.target.value)}>
-            <option value="en">English</option>
-            <option value="ru">Русский</option>
-            <option value="hy">Հայերեն</option>
-          </select>
-          <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
-          <CutInput 
-            onAdd={addCut} 
-            onEdit={editCut} 
-            currentCut={currentCut} 
-            setCurrentCut={setCurrentCut} 
-            boardWidth={boardWidth} 
-            boardHeight={boardHeight} 
-            translations={translations[language]} 
-          />
-          <CutTable 
-            cuts={cuts} 
-            onEdit={setCurrentCut} 
-            onDelete={deleteCut} 
-            translations={translations[language]}  
-          />
-          <button className={styles.button} onClick={placeCutsOnBoards}>
-            {translations[language].calculate}  
-          </button>
-          <BoardDisplay
-            boards={boards}
-            setBoards={setBoards}
-            setBoardCount={setBoardCount}
-            boardWidth={boardWidth}
-            boardHeight={boardHeight}
-            selectedImage={selectedImage}
-            boardCount={boardCount}
-            totalCuts={totalCuts}
-            setTotalCuts={setTotalCuts}
-            translations={translations[language]}  
-          />
+          <div className={styles.select}>
+            <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+              <option value="en">English</option>
+              <option value="ru">Русский</option>
+              <option value="hy">Հայերեն</option>
+            </select>
+          </div>
+          <div className={styles.center}>
+            <h1>{translations[language].calculate}</h1>
+
+
+            <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+            <CutInput
+              onAdd={addCut}
+              onEdit={editCut}
+              currentCut={currentCut}
+              setCurrentCut={setCurrentCut}
+              boardWidth={boardWidth}
+              boardHeight={boardHeight}
+              translations={translations[language]}
+            />
+            <CutTable
+              cuts={cuts}
+              onEdit={setCurrentCut}
+              onDelete={deleteCut}
+              translations={translations[language]}
+            />
+            <button className={styles.button} onClick={placeCutsOnBoards}>
+              {translations[language].calculate}
+            </button>
+            <BoardDisplay
+              boards={boards}
+              setBoards={setBoards}
+              setBoardCount={setBoardCount}
+              boardWidth={boardWidth}
+              boardHeight={boardHeight}
+              selectedImage={selectedImage}
+              boardCount={boardCount}
+              totalCuts={totalCuts}
+              setTotalCuts={setTotalCuts}
+              translations={translations[language]}
+            />
+          </div>
         </div>
       )}
     </div>
   );
+
 }
 
 export default App;

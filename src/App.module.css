@@ -40,5 +40,23 @@ button {
   background-color: #4caf50;
   color: white;
 }
+.select {
+  float: left;
+  padding: 5px;
+  background-color: #f0f0f0;  
+  border: 1px solid #ccc;  
+  border-radius: 5px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease;  
+}
 
+.select:hover {
+  background-color: #e0e0e0; 
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);  
+  border-color: #bbb;  
+}
+
+.center{
+  margin-top: 100px;
+}
  
