@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CutTable.module.css';
 
-function CutTable({ cuts, onEdit, onDelete }) {
+const CutTable = React.memo(({ cuts, onEdit, onDelete }) => {
   return (
     <table className={styles.table}>
       <thead>
@@ -15,9 +15,9 @@ function CutTable({ cuts, onEdit, onDelete }) {
       <tbody>
         {cuts.map((cut, index) => (
           <tr key={index}>
-            <td>{cut.height ?  cut.height : 'Нет данных'}</td>
-            <td>{cut.width ?  cut.width : 'Нет данных'}</td>
-            <td>{cut.quantity ?   cut.quantity : 'Нет данных'}</td>
+            <td>{cut.height || 'Нет данных'}</td>
+            <td>{cut.width || 'Нет данных'}</td>
+            <td>{cut.quantity || 'Нет данных'}</td>
             <td>
               {onEdit && (
                 <button 
@@ -39,6 +39,6 @@ function CutTable({ cuts, onEdit, onDelete }) {
       </tbody>
     </table>
   );
-}
+});
 
 export default CutTable;

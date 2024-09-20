@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
@@ -17,19 +17,22 @@ function App() {
   const boardHeight = 1830;
 
   const addCut = (cut) => {
-    setCuts([...cuts, cut]);
-    setTotalCuts(totalCuts + cut.quantity);
+    setCuts(prevCuts => [...prevCuts, cut]);
+    setTotalCuts(prevTotalCuts => prevTotalCuts + cut.quantity);
   };
 
   const deleteCut = (index) => {
     const cutToDelete = cuts[index];
-    setCuts(cuts.filter((_, i) => i !== index));
-    setTotalCuts(totalCuts - cutToDelete.quantity);
+    setCuts(prevCuts => prevCuts.filter((_, i) => i !== index));
+    setTotalCuts(prevTotalCuts => prevTotalCuts - cutToDelete.quantity);
   };
 
   const editCut = (index, updatedCut) => {
-    const updatedCuts = cuts.map((cut, i) => (i === index ? updatedCut : cut));
-    setCuts(updatedCuts);
+    setCuts(prevCuts => {
+      const updatedCuts = [...prevCuts];
+      updatedCuts[index] = updatedCut;
+      return updatedCuts;
+    });
     setCurrentCut(null);
   };
 
@@ -53,14 +56,12 @@ function App() {
     setBoardCount(newBoards.length);
   };
 
-  const createNewBoard = () => {
-    return {
-      width: boardWidth,
-      height: boardHeight,
-      freeSpaces: [{ x: 0, y: 0, width: boardWidth, height: boardHeight }],
-      cuts: []
-    };
-  };
+  const createNewBoard = () => ({
+    width: boardWidth,
+    height: boardHeight,
+    freeSpaces: [{ x: 0, y: 0, width: boardWidth, height: boardHeight }],
+    cuts: []
+  });
 
   const placeCutOnBoard = (board, cut) => {
     for (let i = 0; i < board.freeSpaces.length; i++) {
@@ -101,41 +102,44 @@ function App() {
     board.freeSpaces.push(...newSpaces);
   };
 
-  
-  
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
     window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  const totalCutsMemo = useMemo(() => totalCuts, [totalCuts]);
+  const boardsMemo = useMemo(() => boards, [boards]);
 
   return (
     <div className={styles.table}>
       {isMobile ? (
         <MobileView />
       ) : (
-        <div >
+        <div>
           <h1>Оптимизатор раскроя</h1>
           <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
-          <CutInput onAdd={addCut} onEdit={editCut} currentCut={currentCut} setCurrentCut={setCurrentCut} boardWidth={boardWidth} boardHeight={boardHeight} />
+          <CutInput 
+            onAdd={addCut} 
+            onEdit={editCut} 
+            currentCut={currentCut} 
+            setCurrentCut={setCurrentCut} 
+            boardWidth={boardWidth} 
+            boardHeight={boardHeight} 
+          />
           <CutTable cuts={cuts} onEdit={setCurrentCut} onDelete={deleteCut} />
           <button className={styles.button} onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
           <BoardDisplay
-            boards={boards}
+            boards={boardsMemo}
             setBoards={setBoards}
             setBoardCount={setBoardCount}
             boardWidth={boardWidth}
             boardHeight={boardHeight}
             selectedImage={selectedImage}
             boardCount={boardCount}
-            totalCuts={totalCuts}
+            totalCuts={totalCutsMemo}
             setTotalCuts={setTotalCuts}
           />
         </div>
