@@ -4,6 +4,7 @@ import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
 import styles from './App.module.css';  
+ 
 
 function App() {
   const [cuts, setCuts] = useState([]);
@@ -16,12 +17,8 @@ function App() {
     setCuts([...cuts, cut]);
   };
 
-  const editCut = (index, newCut) => {
-    const newCuts = [...cuts];
-    newCuts[index] = newCut;
-    setCuts(newCuts);
-  };
 
+  
   const deleteCut = (index) => {
     setCuts(cuts.filter((_, i) => i !== index));
   };
@@ -98,7 +95,7 @@ function App() {
       <h1>Оптимизатор раскроя</h1>
       <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
       <CutInput onAdd={addCut} boardWidth={boardWidth} boardHeight={boardHeight} />
-      <CutTable cuts={cuts} onEdit={editCut} onDelete={deleteCut} />
+      <CutTable cuts={cuts}  onDelete={deleteCut} />
       <button onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
       <BoardDisplay 
         boards={boards} 

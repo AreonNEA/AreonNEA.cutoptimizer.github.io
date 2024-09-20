@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CutTable({ cuts, onEdit, onDelete }) {
+function CutTable({ cuts,  onDelete }) {
   return (
     <table>
       <thead>
@@ -18,7 +18,6 @@ function CutTable({ cuts, onEdit, onDelete }) {
             <td>{cut.width}</td>
             <td>{cut.quantity}</td>
             <td>
-              <button onClick={() => onEdit(index, cut)}>Изменить</button>
               <button onClick={() => onDelete(index)}>Удалить</button>
             </td>
           </tr>
