@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
+import MobileView from './MobileView';  
 import styles from './App.module.css';
-
 
 function App() {
   const [cuts, setCuts] = useState([]);
@@ -101,24 +101,44 @@ function App() {
     board.freeSpaces.push(...newSpaces);
   };
 
+  // Проверка на мобильное устройство
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.table}>
-      <h1>Оптимизатор раскроя</h1>
-      <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
-      <CutInput onAdd={addCut} onEdit={editCut} currentCut={currentCut} setCurrentCut={setCurrentCut} boardWidth={boardWidth} boardHeight={boardHeight} />
-      <CutTable cuts={cuts} onEdit={setCurrentCut} onDelete={deleteCut} />
-      <button className={styles.button} onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
-      <BoardDisplay
-        boards={boards}
-        setBoards={setBoards}
-        setBoardCount={setBoardCount}
-        boardWidth={boardWidth}
-        boardHeight={boardHeight}
-        selectedImage={selectedImage}
-        boardCount={boardCount}
-        totalCuts={totalCuts}
-        setTotalCuts={setTotalCuts}
-      />
+      {isMobile ? (
+        <MobileView />
+      ) : (
+        <>
+          <h1>Оптимизатор раскроя</h1>
+          <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
+          <CutInput onAdd={addCut} onEdit={editCut} currentCut={currentCut} setCurrentCut={setCurrentCut} boardWidth={boardWidth} boardHeight={boardHeight} />
+          <CutTable cuts={cuts} onEdit={setCurrentCut} onDelete={deleteCut} />
+          <button className={styles.button} onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
+          <BoardDisplay
+            boards={boards}
+            setBoards={setBoards}
+            setBoardCount={setBoardCount}
+            boardWidth={boardWidth}
+            boardHeight={boardHeight}
+            selectedImage={selectedImage}
+            boardCount={boardCount}
+            totalCuts={totalCuts}
+            setTotalCuts={setTotalCuts}
+          />
+        </>
+      )}
     </div>
   );
 }
