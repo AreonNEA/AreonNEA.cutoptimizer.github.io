@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import styles from './CutInput.module.css'; // Импорт CSS-модуля
 
 function CutInput({ onAdd, boardWidth, boardHeight }) {
   const [height, setHeight] = useState('');
@@ -16,23 +17,20 @@ function CutInput({ onAdd, boardWidth, boardHeight }) {
       return;
     }
 
-  
     if (parsedHeight > boardHeight || parsedWidth > boardWidth) {
       alert(`Размеры реза превышают размер доски (${boardWidth}x${boardHeight}).`);
       return;
     }
 
-   
     onAdd({ height: parsedHeight, width: parsedWidth, quantity: parsedQuantity });
 
- 
     setHeight('');
     setWidth('');
     setQuantity('');
   };
 
   return (
-    <div>
+    <div className={styles.inputWrapper}>
       <input type="number" placeholder="Высота" value={height} onChange={e => setHeight(e.target.value)} />
       <input type="number" placeholder="Ширина" value={width} onChange={e => setWidth(e.target.value)} />
       <input type="number" placeholder="Количество" value={quantity} onChange={e => setQuantity(e.target.value)} />

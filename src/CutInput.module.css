@@ -1,0 +1,14 @@
+.inputWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .inputWrapper input {
+    margin: 5px;
+  }
+  
+  .inputWrapper button {
+    margin-top: 10px;
+  }
+  

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
-import './App.css';
+import styles from './App.module.css'; // Импорт CSS-модуля
 
 function App() {
   const [cuts, setCuts] = useState([]);
@@ -26,11 +26,10 @@ function App() {
 
   const placeCutsOnBoards = () => {
     const sortedCuts = [...cuts].sort((a, b) => (b.width * b.height) - (a.width * a.height));
-  
     const newBoards = [];
     let currentBoard = createNewBoard();
     newBoards.push(currentBoard);
-  
+
     sortedCuts.forEach(cut => {
       for (let i = 0; i < cut.quantity; i++) {
         if (!placeCutOnBoard(currentBoard, cut)) {
@@ -40,7 +39,7 @@ function App() {
         }
       }
     });
-  
+
     setBoards(newBoards);
   };
 
@@ -93,7 +92,7 @@ function App() {
   };
 
   return (
-    <div className='table'>
+    <div className={styles.table}>
       <h1>Оптимизатор раскроя</h1>
       <CutInput onAdd={addCut} boardWidth={boardWidth} boardHeight={boardHeight} />
       <CutTable cuts={cuts} onEdit={editCut} onDelete={deleteCut} />
