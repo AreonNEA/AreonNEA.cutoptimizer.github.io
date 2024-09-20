@@ -15,9 +15,9 @@ function CutTable({ cuts, onEdit, onDelete }) {
       <tbody>
         {cuts.map((cut, index) => (
           <tr key={index}>
-            <td>{cut.height}</td>
-            <td>{cut.width}</td>
-            <td>{cut.quantity}</td>
+            <td>{cut.height ?  cut.height : 'Нет данных'}</td>
+            <td>{cut.width ?  cut.width : 'Нет данных'}</td>
+            <td>{cut.quantity ?   cut.quantity : 'Нет данных'}</td>
             <td>
               {onEdit && (
                 <button 

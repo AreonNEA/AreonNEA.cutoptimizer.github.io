@@ -17,7 +17,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
         <h2>Размеры листа (мм): {boardHeight} x {boardWidth}</h2>
         <h3>Параметры раскроя:</h3>
         <p>Листов в раскрое: {boardCount}</p>
-        <p>Всего деталей: {totalCuts}</p>
+        <p>Всего деталей: {totalCuts ?  totalCuts : 0}</p>
       </div>
       {boards.map((board, boardIndex) => (
         <div key={boardIndex} className={styles.center} style={{ position: 'relative', marginBottom: '20px' }}>
