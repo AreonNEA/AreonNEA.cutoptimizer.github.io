@@ -4,6 +4,7 @@ import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
 import styles from './App.module.css';
+ 
 
 function App() {
   const [cuts, setCuts] = useState([]);
