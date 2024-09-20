@@ -18,9 +18,9 @@ function CutTable({ cuts, onEdit, onDelete, noDataMessage, translations }) {
         {cuts.length > 0 ? (
           cuts.map((cut, index) => (
             <tr key={index}>
-              <td>{cut.height || noDataMessage}</td>
-              <td>{cut.width || noDataMessage}</td>
-              <td>{cut.quantity || noDataMessage}</td>
+              <td>{cut.height || 0}</td>
+              <td>{cut.width || 0}</td>
+              <td>{cut.quantity || 0}</td>
               <td>
                 {onEdit && (
                   <button 
