@@ -1,5 +1,4 @@
-export function removeCut(boards, setBoards, setBoardCount, cutToRemove) {
-  console.log('Boards before removing:', boards);
+export function removeCut(boards, setBoards, setBoardCount, cutToRemove, setTotalCuts) {
   const lastBoardIndex = boards.length - 1;
   const lastBoard = boards[lastBoardIndex];
   if (!lastBoard) return;  
@@ -7,16 +6,18 @@ export function removeCut(boards, setBoards, setBoardCount, cutToRemove) {
   const updatedCuts = [...lastBoard.cuts];
   const cutIndex = updatedCuts
     .slice()  
-    .reverse()  
+    .reverse() 
     .findIndex(cut => cut.width === cutToRemove.width && cut.height === cutToRemove.height);
 
   if (cutIndex !== -1) {
-    updatedCuts.splice(updatedCuts.length - 1 - cutIndex, 1);
+    const actualIndex = updatedCuts.length - 1 - cutIndex; 
+    updatedCuts.splice(actualIndex, 1);  
+    setTotalCuts(prevTotalCuts => prevTotalCuts - 1); 
   }
 
   const updatedBoards = [...boards];
   if (updatedCuts.length === 0) {
-    updatedBoards.splice(lastBoardIndex, 1);
+    updatedBoards.splice(lastBoardIndex, 1); 
   } else {
     updatedBoards[lastBoardIndex] = {
       ...lastBoard,
@@ -24,7 +25,6 @@ export function removeCut(boards, setBoards, setBoardCount, cutToRemove) {
     };
   }
 
-  console.log('Updated boards:', updatedBoards);
   setBoards(updatedBoards);
   setBoardCount(updatedBoards.length);  
 }

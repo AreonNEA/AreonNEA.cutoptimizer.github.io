@@ -1,40 +1,43 @@
-import { useState } from 'react';
-import styles from './CutInput.module.css';  
+import React, { useState } from 'react';
 
 function CutInput({ onAdd, boardWidth, boardHeight }) {
-  const [height, setHeight] = useState('');
-  const [width, setWidth] = useState('');
-  const [quantity, setQuantity] = useState('');
+  const [quantity, setQuantity] = useState(1);
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
-  const handleAdd = () => {
-    const parsedHeight = parseInt(height);
-    const parsedWidth = parseInt(width);
-    const parsedQuantity = parseInt(quantity);
-
-    if (isNaN(parsedHeight) || isNaN(parsedWidth) || isNaN(parsedQuantity) || 
-        parsedHeight <= 0 || parsedWidth <= 0 || parsedQuantity <= 0) {
-      alert('Введите корректные значения');
-      return;
-    }
-
-    if (parsedHeight > boardHeight || parsedWidth > boardWidth) {
-      alert(`Размеры реза превышают размер доски (${boardWidth}x${boardHeight}).`);
-      return;
-    }
-
-    onAdd({ height: parsedHeight, width: parsedWidth, quantity: parsedQuantity });
-
-    setHeight('');
-    setWidth('');
-    setQuantity('');
+  const handleAddCut = () => {
+    const cut = {
+      width: parseInt(width),
+      height: parseInt(height),
+      quantity: parseInt(quantity),
+    };
+    onAdd(cut);
+    setWidth(0);
+    setHeight(0);
+    setQuantity(1); 
   };
 
   return (
-    <div className={styles.inputWrapper}>
-      <input type="number" placeholder="Высота" value={height} onChange={e => setHeight(e.target.value)} />
-      <input type="number" placeholder="Ширина" value={width} onChange={e => setWidth(e.target.value)} />
-      <input type="number" placeholder="Количество" value={quantity} onChange={e => setQuantity(e.target.value)} />
-      <button onClick={handleAdd}>Добавить</button>
+    <div>
+      <input
+        type="number"
+        placeholder="Ширина"
+        value={width}
+        onChange={e => setWidth(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Высота"
+        value={height}
+        onChange={e => setHeight(e.target.value)}
+      />
+      <input
+        type="number"
+        placeholder="Количество"
+        value={quantity}
+        onChange={e => setQuantity(e.target.value)}
+      />
+      <button onClick={handleAddCut}>Добавить рез</button>
     </div>
   );
 }

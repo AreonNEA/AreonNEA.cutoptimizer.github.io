@@ -10,15 +10,19 @@ function App() {
   const [boards, setBoards] = useState([]);
   const [selectedImage, setSelectedImage] = useState('/images/image1.png');
   const [boardCount, setBoardCount] = useState(0);
+  const [totalCuts, setTotalCuts] = useState(0);  
   const boardWidth = 3630;
   const boardHeight = 1830;
 
   const addCut = (cut) => {
     setCuts([...cuts, cut]);
+    setTotalCuts(totalCuts + cut.quantity);  
   };
 
   const deleteCut = (index) => {
+    const cutToDelete = cuts[index];
     setCuts(cuts.filter((_, i) => i !== index));
+    setTotalCuts(totalCuts - cutToDelete.quantity); 
   };
 
   const placeCutsOnBoards = () => {
@@ -104,6 +108,8 @@ function App() {
         boardHeight={boardHeight} 
         selectedImage={selectedImage} 
         boardCount={boardCount} 
+        totalCuts={totalCuts} 
+        setTotalCuts={setTotalCuts}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CutTable({ cuts,  onDelete }) {
+function CutTable({ cuts, onEdit, onDelete }) {
   return (
     <table>
       <thead>

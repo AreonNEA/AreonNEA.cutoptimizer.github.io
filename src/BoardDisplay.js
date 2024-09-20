@@ -1,10 +1,15 @@
 import styles from './BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
 
-function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount }) {
+function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount, totalCuts,setTotalCuts }) {
   return (
     <div className={styles.tablePosition}>
-      <h2>Общее количество досок: {boardCount}</h2>
+      <div className={styles.parameters}>
+        <h2>Размеры листа (мм):  {boardHeight} x {boardWidth} </h2>
+        <h3>Параметры раскроя:</h3>
+        <p>Листов в раскрое: {boardCount}</p>
+        <p>Всего деталей: {totalCuts}</p>
+      </div>
       {boards.map((board, boardIndex) => (
         <div key={boardIndex} className={styles.center}>
           <h3>Доска {boardIndex + 1}</h3>
@@ -15,24 +20,24 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
               height: `${boardHeight / 10}px`,
               border: '1px solid black',
               margin: "10px",
-              backgroundImage: `url(${selectedImage})`,  
+              backgroundImage: `url(${selectedImage})`,
               backgroundSize: 'cover',
             }}
           >
             {board.cuts.map((cut, cutIndex) => (
               <div
-                onClick={() => removeCut(boards, setBoards, setBoardCount, cut)}  
+                onClick={() => removeCut(boards, setBoards, setBoardCount, cut,setTotalCuts)}
                 key={cutIndex}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundImage = 'url(/images/bin.png)'; 
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';  
+                  e.currentTarget.style.backgroundImage = 'url(/images/bin.png)';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
                   e.currentTarget.style.backgroundSize = 'cover';
-                  e.currentTarget.style.border = '2px solid green';  
+                  e.currentTarget.style.border = '2px solid green';
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundImage = 'none';  
-                  e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)'; 
-                  e.currentTarget.style.border = '1px solid black'; 
+                  e.currentTarget.style.backgroundImage = 'none';
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
+                  e.currentTarget.style.border = '1px solid black';
                 }}
                 style={{
                   position: 'absolute',
@@ -42,6 +47,8 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                   height: `${cut.height / 10}px`,
                   backgroundColor: "rgba(255, 0, 0, 0.6)",
                   border: '1px solid black',
+              
+                  
                 }}
               />
             ))}
