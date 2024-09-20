@@ -3,7 +3,7 @@ import styles from './CutTable.module.css';
 
 function CutTable({ cuts, onEdit, onDelete }) {
   return (
-    <table>
+    <table className={styles.table}>
       <thead>
         <tr>
           <th>Высота</th>
@@ -19,8 +19,20 @@ function CutTable({ cuts, onEdit, onDelete }) {
             <td>{cut.width}</td>
             <td>{cut.quantity}</td>
             <td>
-              <button onClick={() => onEdit({ ...cut, index })}>Изменить</button>
-              <button onClick={() => onDelete(index)}>Удалить</button>
+              {onEdit && (
+                <button 
+                  className={styles.editButton} 
+                  onClick={() => onEdit({ ...cut, index })}>
+                  Изменить
+                </button>
+              )}
+              {onDelete && (
+                <button 
+                  className={styles.deleteButton} 
+                  onClick={() => onDelete(index)}>
+                  Удалить
+                </button>
+              )}
             </td>
           </tr>
         ))}

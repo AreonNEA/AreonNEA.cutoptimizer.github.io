@@ -1,11 +1,36 @@
-table{
+
+.table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
     background-color: rgb(96, 147, 189);
     margin: 10px;
     padding: 10px;
     border-radius: 10px;
-
-}
-
-table th{
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+ 
     padding: 20px;
-}
+
+  }
+  
+  .editButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
