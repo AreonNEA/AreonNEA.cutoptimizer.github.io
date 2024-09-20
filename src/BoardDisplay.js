@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
 
@@ -7,6 +8,8 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
     setBoards(updatedBoards);
     setBoardCount(updatedBoards.length);
   };
+
+  const scaleFactor = 4;  
 
   return (
     <div className={styles.tablePosition}>
@@ -18,6 +21,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
       </div>
       {boards.map((board, boardIndex) => (
         <div key={boardIndex} className={styles.center} style={{ position: 'relative', marginBottom: '20px' }}>
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <h3>Доска {boardIndex + 1}</h3>
             <button
@@ -29,15 +33,16 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                 borderRadius: '5px',
                 cursor: 'pointer',
                 padding: '5px 10px',
+                margin: "auto 10px"
               }}
             >
               Удалить
             </button>
           </div>
-          <div
+          <div 
             style={{
-              width: `${boardWidth / 10}px`,
-              height: `${boardHeight / 10}px`,
+              width: `${boardWidth / scaleFactor}px`,   
+              height: `${boardHeight / scaleFactor}px`,  
               border: '1px solid black',
               backgroundImage: `url(${selectedImage})`,
               backgroundSize: 'cover',
@@ -45,7 +50,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
             }}
           >
             {board.cuts.map((cut, cutIndex) => (
-              <div
+              <div 
                 key={cutIndex}
                 onClick={() => removeCut(boards, setBoards, setBoardCount, cut, setTotalCuts)}
                 onMouseEnter={(e) => {
@@ -61,10 +66,10 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                 }}
                 style={{
                   position: 'absolute',
-                  left: `${cut.x / 10}px`,
-                  top: `${cut.y / 10}px`,
-                  width: `${cut.width / 10}px`,
-                  height: `${cut.height / 10}px`,
+                  left: `${cut.x / scaleFactor}px`,   
+                  top: `${cut.y / scaleFactor}px`,   
+                  width: `${cut.width / scaleFactor}px`,   
+                  height: `${cut.height / scaleFactor}px`,  
                   backgroundColor: "rgba(255, 0, 0, 0.6)",
                   border: '1px solid black',
                   cursor: 'pointer',

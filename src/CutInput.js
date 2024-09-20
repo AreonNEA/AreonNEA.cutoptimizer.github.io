@@ -11,9 +11,9 @@ function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardH
       setHeight(currentCut.height);
       setQuantity(currentCut.quantity);
     } else {
-      setWidth(0);
-      setHeight(0);
-      setQuantity(1);
+      setWidth("");
+      setHeight("");
+      setQuantity("");
     }
   }, [currentCut]);
 

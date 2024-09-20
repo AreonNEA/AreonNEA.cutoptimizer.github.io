@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './CutTable.module.css';
 
 function CutTable({ cuts, onEdit, onDelete }) {
   return (

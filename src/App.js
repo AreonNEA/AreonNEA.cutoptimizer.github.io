@@ -4,7 +4,7 @@ import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
 import styles from './App.module.css';
- 
+
 
 function App() {
   const [cuts, setCuts] = useState([]);
@@ -12,7 +12,7 @@ function App() {
   const [selectedImage, setSelectedImage] = useState('/images/image1.png');
   const [boardCount, setBoardCount] = useState(0);
   const [totalCuts, setTotalCuts] = useState(0);
-  const [currentCut, setCurrentCut] = useState(null);  
+  const [currentCut, setCurrentCut] = useState(null);
   const boardWidth = 3630;
   const boardHeight = 1830;
 
@@ -30,7 +30,7 @@ function App() {
   const editCut = (index, updatedCut) => {
     const updatedCuts = cuts.map((cut, i) => (i === index ? updatedCut : cut));
     setCuts(updatedCuts);
-    setCurrentCut(null); 
+    setCurrentCut(null);
   };
 
   const placeCutsOnBoards = () => {
@@ -107,16 +107,16 @@ function App() {
       <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
       <CutInput onAdd={addCut} onEdit={editCut} currentCut={currentCut} setCurrentCut={setCurrentCut} boardWidth={boardWidth} boardHeight={boardHeight} />
       <CutTable cuts={cuts} onEdit={setCurrentCut} onDelete={deleteCut} />
-      <button onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
-      <BoardDisplay 
-        boards={boards} 
-        setBoards={setBoards} 
-        setBoardCount={setBoardCount}  
-        boardWidth={boardWidth} 
-        boardHeight={boardHeight} 
-        selectedImage={selectedImage} 
-        boardCount={boardCount} 
-        totalCuts={totalCuts} 
+      <button className={styles.button} onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
+      <BoardDisplay
+        boards={boards}
+        setBoards={setBoards}
+        setBoardCount={setBoardCount}
+        boardWidth={boardWidth}
+        boardHeight={boardHeight}
+        selectedImage={selectedImage}
+        boardCount={boardCount}
+        totalCuts={totalCuts}
         setTotalCuts={setTotalCuts}
       />
     </div>
