@@ -101,7 +101,8 @@ function App() {
     board.freeSpaces.push(...newSpaces);
   };
 
-  // Проверка на мобильное устройство
+  
+  
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   useEffect(() => {
@@ -120,7 +121,7 @@ function App() {
       {isMobile ? (
         <MobileView />
       ) : (
-        <>
+        <div >
           <h1>Оптимизатор раскроя</h1>
           <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
           <CutInput onAdd={addCut} onEdit={editCut} currentCut={currentCut} setCurrentCut={setCurrentCut} boardWidth={boardWidth} boardHeight={boardHeight} />
@@ -137,7 +138,7 @@ function App() {
             totalCuts={totalCuts}
             setTotalCuts={setTotalCuts}
           />
-        </>
+        </div>
       )}
     </div>
   );
