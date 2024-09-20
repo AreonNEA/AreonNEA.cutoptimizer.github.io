@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './BoardDisplay.module.css';
+import styles from './styles/BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
 
 function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount, totalCuts, setTotalCuts, translations }) {

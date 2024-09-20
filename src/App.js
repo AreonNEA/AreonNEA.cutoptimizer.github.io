@@ -4,7 +4,7 @@ import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
 import MobileView from './MobileView';
-import styles from './App.module.css';
+import styles from './styles/App.module.css';
 import { translations } from './translations';
 
 function App() {

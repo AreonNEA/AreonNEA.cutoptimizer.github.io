@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CutTable.module.css';
+import styles from './styles/CutTable.module.css';
 
 function CutTable({ cuts, onEdit, onDelete, noDataMessage, translations }) {
   const { height, width, quantity, actions } = translations;

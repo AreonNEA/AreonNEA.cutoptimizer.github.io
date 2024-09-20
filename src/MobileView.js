@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MobileView.module.css';
+import styles from './styles/MobileView.module.css';
 
 function MobileView() {
   return (
