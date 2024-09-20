@@ -3,13 +3,13 @@ import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
 import ImageSelector from './ImageSelector';
-import styles from './App.module.css';  
- 
+import styles from './App.module.css';
 
 function App() {
   const [cuts, setCuts] = useState([]);
   const [boards, setBoards] = useState([]);
   const [selectedImage, setSelectedImage] = useState('/images/image1.png');
+  const [boardCount, setBoardCount] = useState(0);
   const boardWidth = 3630;
   const boardHeight = 1830;
 
@@ -17,8 +17,6 @@ function App() {
     setCuts([...cuts, cut]);
   };
 
-
-  
   const deleteCut = (index) => {
     setCuts(cuts.filter((_, i) => i !== index));
   };
@@ -40,6 +38,7 @@ function App() {
     });
 
     setBoards(newBoards);
+    setBoardCount(newBoards.length);
   };
 
   const createNewBoard = () => {
@@ -95,14 +94,16 @@ function App() {
       <h1>Оптимизатор раскроя</h1>
       <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
       <CutInput onAdd={addCut} boardWidth={boardWidth} boardHeight={boardHeight} />
-      <CutTable cuts={cuts}  onDelete={deleteCut} />
+      <CutTable cuts={cuts} onDelete={deleteCut} />
       <button onClick={placeCutsOnBoards}>Рассчитать раскрой</button>
       <BoardDisplay 
         boards={boards} 
         setBoards={setBoards} 
+        setBoardCount={setBoardCount}  
         boardWidth={boardWidth} 
         boardHeight={boardHeight} 
-        selectedImage={selectedImage}  
+        selectedImage={selectedImage} 
+        boardCount={boardCount} 
       />
     </div>
   );

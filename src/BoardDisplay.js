@@ -1,9 +1,10 @@
 import styles from './BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
 
-function BoardDisplay({ boards, setBoards, boardWidth, boardHeight, selectedImage }) {
+function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount }) {
   return (
     <div className={styles.tablePosition}>
+      <h2>Общее количество досок: {boardCount}</h2>
       {boards.map((board, boardIndex) => (
         <div key={boardIndex} className={styles.center}>
           <h3>Доска {boardIndex + 1}</h3>
@@ -20,7 +21,7 @@ function BoardDisplay({ boards, setBoards, boardWidth, boardHeight, selectedImag
           >
             {board.cuts.map((cut, cutIndex) => (
               <div
-                onClick={() => removeCut(boards, setBoards, cut)}
+                onClick={() => removeCut(boards, setBoards, setBoardCount, cut)}  
                 key={cutIndex}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundImage = 'url(/images/bin.png)'; 
@@ -31,7 +32,6 @@ function BoardDisplay({ boards, setBoards, boardWidth, boardHeight, selectedImag
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundImage = 'none';  
                   e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)'; 
-
                   e.currentTarget.style.border = '1px solid black'; 
                 }}
                 style={{
