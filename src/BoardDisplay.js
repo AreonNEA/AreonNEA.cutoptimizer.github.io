@@ -1,10 +1,7 @@
 import styles from './BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
 
-
- 
-
-function BoardDisplay({ boards, setBoards, boardWidth, boardHeight }) {
+function BoardDisplay({ boards, setBoards, boardWidth, boardHeight, selectedImage }) {
   return (
     <div className={styles.tablePosition}>
       {boards.map((board, boardIndex) => (
@@ -16,7 +13,9 @@ function BoardDisplay({ boards, setBoards, boardWidth, boardHeight }) {
               width: `${boardWidth / 10}px`,
               height: `${boardHeight / 10}px`,
               border: '1px solid black',
-              margin: "10px"
+              margin: "10px",
+              backgroundImage: `url(${selectedImage})`,  
+              backgroundSize: 'cover',
             }}
           >
             {board.cuts.map((cut, cutIndex) => (
@@ -41,5 +40,4 @@ function BoardDisplay({ boards, setBoards, boardWidth, boardHeight }) {
   );
 }
 
- 
 export default BoardDisplay;

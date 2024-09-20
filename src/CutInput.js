@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styles from './CutInput.module.css'; // Импорт CSS-модуля
+import styles from './CutInput.module.css';  
 
 function CutInput({ onAdd, boardWidth, boardHeight }) {
   const [height, setHeight] = useState('');

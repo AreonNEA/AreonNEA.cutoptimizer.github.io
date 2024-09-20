@@ -1,0 +1,19 @@
+.imageSelector {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .imageSelector img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid transparent;
+  }
+  
+  .imageSelector img.selected {
+    border: 2px solid blue;
+  }
+  
