@@ -1,6 +1,8 @@
 .tablePosition {
   flex-wrap: wrap;
+  display: flex;
   justify-content: center;
+ 
 }
 
 .center {
@@ -10,16 +12,9 @@
 }
 
 .parameters {
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   background-color: rgb(96, 147, 189);
   padding: 10px;
   border-radius: 25px;
+  margin: 10px;
+
 }
-
-
- 

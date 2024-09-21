@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import styles from './styles/CutInput.module.css';
 function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardHeight, translations }) {
   const [quantity, setQuantity] = useState(1);
   const [width, setWidth] = useState(0);
@@ -37,7 +37,7 @@ function CutInput({ onAdd, onEdit, currentCut, setCurrentCut, boardWidth, boardH
   };
 
   return (
-    <div>
+    <div className={styles.inputWrapper}>
       <input
         type="number"
         placeholder={translations.width}  
