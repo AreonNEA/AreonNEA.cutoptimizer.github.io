@@ -18,3 +18,8 @@
   margin: 10px;
  
 }
+@media (max-width: 600px) {
+  .imageSelector img {
+    width: 60px;  
+  }
+}

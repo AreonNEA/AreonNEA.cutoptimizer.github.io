@@ -1,8 +1,22 @@
+body {
+  overflow-x: hidden;  
+  margin: 0;  
+}
+
 .mobileWrapper {
-    text-align: center;
-    padding: 20px;
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;  
+  overflow: hidden;  
+  box-sizing: border-box;  
+}
+
+@media (max-width: 600px) {
+  .mobileWrapper {
+    font-size: 3vw;  
+    padding: 2vw;
+    margin: 1vw;
   }
-  
+}

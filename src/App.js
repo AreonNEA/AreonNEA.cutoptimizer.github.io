@@ -6,7 +6,7 @@ import ImageSelector from './ImageSelector';
 import MobileView from './MobileView';
 import styles from './styles/App.module.css';
 import { translations } from './translations';
-
+ 
 function App() {
   const [cuts, setCuts] = useState([]);
   const [boards, setBoards] = useState([]);
@@ -107,7 +107,7 @@ function App() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 600);
     };
 
     window.addEventListener('resize', handleResize);
