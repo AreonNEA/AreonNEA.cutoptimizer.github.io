@@ -1,0 +1,70 @@
+* {
+  margin: 5px;
+  padding: 0;
+  scroll-behavior: smooth;
+  transition: all 0.4s ease-in-out;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  transition: all 0.4s;
+
+  background-image: url("/public/images/wood.png");
+  background-attachment: fixed;
+}
+
+#root {
+  background-color: rgba(196, 162, 117, 0.8);
+  border-radius: 10px;
+  margin: 10px;
+}
+
+input[type="number"] {
+  width: 200px;
+  padding: 10px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+input [type="number"]:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+button {
+  background-color:rgb(44, 140, 219);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:focus {
+  outline: none;
+}
