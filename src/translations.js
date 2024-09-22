@@ -35,7 +35,7 @@ export const translations = {
       actions: "Գործողություններ",
       update: "Թարմացնել",
       add: "Ավելացնել Կտրվածք",
-      calculate: "Հաշվել կտրվածքները",
+      calculate: "Հաշվել Կտրվածքները",
       remove: "Հանել",
       board: "Տախտակ",
       boardSize: "Տախտակի չափեր (մմ)",
