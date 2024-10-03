@@ -1,29 +1,32 @@
-name: Deploy to GitHub Pages
+name: Deploy
 
 on:
   push:
     branches:
-      - main  # укажи правильную ветку для деплоя
+      - main  
 
 permissions:
-  contents: write
-  id-token: write
+  id-token: write   
+  contents: write    
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Install dependencies
-        run: npm install
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'   
 
-      - name: Build project
-        run: npm run build
+    - name: Install dependencies
+      run: npm install
 
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v4
