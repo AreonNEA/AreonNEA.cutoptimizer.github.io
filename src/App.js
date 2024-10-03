@@ -6,15 +6,15 @@ import ImageSelector from './ImageSelector';
 import MobileView from './MobileView';
 import styles from './styles/App.module.css';
 import { translations } from './translations';
- 
+
 function App() {
   const [cuts, setCuts] = useState([]);
   const [boards, setBoards] = useState([]);
-  const [selectedImage, setSelectedImage] = useState('/images/image1.png');
   const [boardCount, setBoardCount] = useState(0);
   const [totalCuts, setTotalCuts] = useState(0);
   const [currentCut, setCurrentCut] = useState(null);
   const [language, setLanguage] = useState('en');
+  const [selectedImage, setSelectedImage] = useState('/images/image1.png');  
   const boardWidth = 3630;
   const boardHeight = 1830;
 
@@ -132,8 +132,6 @@ function App() {
           <div className={styles.center}>
             <h1>{translations[language].calculate}</h1>
 
-
-            <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
             <CutInput
               onAdd={addCut}
               onEdit={editCut}
@@ -158,7 +156,8 @@ function App() {
               setBoardCount={setBoardCount}
               boardWidth={boardWidth}
               boardHeight={boardHeight}
-              selectedImage={selectedImage}
+              selectedImage={selectedImage}  
+              setSelectedImage={setSelectedImage} 
               boardCount={boardCount}
               totalCuts={totalCuts}
               setTotalCuts={setTotalCuts}
@@ -169,7 +168,6 @@ function App() {
       )}
     </div>
   );
-
 }
 
 export default App;

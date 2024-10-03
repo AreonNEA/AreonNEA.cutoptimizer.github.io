@@ -1,19 +1,21 @@
 import React from 'react';
 import styles from './styles/BoardDisplay.module.css';
 import { removeCut } from './boardUtils';
+import ImageSelector from './ImageSelector';
 
-function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, boardCount, totalCuts, setTotalCuts, translations }) {
+function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeight, selectedImage, setSelectedImage, boardCount, totalCuts, setTotalCuts, translations }) {
   const handleRemoveBoard = (boardIndex) => {
     const updatedBoards = boards.filter((_, index) => index !== boardIndex);
     setBoards(updatedBoards);
     setBoardCount(updatedBoards.length);
   };
 
-  const scaleFactor = 4;  
+  const scaleFactor = 4;
 
   return (
     <div className={styles.tablePosition}>
       <div className={styles.parameters}>
+        <ImageSelector selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
         <h2>{translations.boardSize}: {boardHeight} x {boardWidth}</h2>
         <h3>{translations.calculate}:</h3>
         <p>{translations.board}: {boardCount}</p>
@@ -35,13 +37,13 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                 margin: "auto 10px"
               }}
             >
-              {translations.remove}  
+              {translations.remove}
             </button>
           </div>
-          <div 
+          <div
             style={{
-              width: `${boardWidth / scaleFactor}px`,   
-              height: `${boardHeight / scaleFactor}px`,  
+              width: `${boardWidth / scaleFactor}px`,
+              height: `${boardHeight / scaleFactor}px`,
               border: '1px solid black',
               backgroundImage: `url(${selectedImage})`,
               backgroundPosition: 'center',
@@ -50,7 +52,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
             }}
           >
             {board.cuts.map((cut, cutIndex) => (
-              <div 
+              <div
                 key={cutIndex}
                 onClick={() => removeCut(boards, setBoards, setBoardCount, cut, setTotalCuts)}
                 onMouseEnter={(e) => {
@@ -58,8 +60,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                   e.currentTarget.style.backgroundColor = 'rgba(255, 0, 0, 0.6)';
                   e.currentTarget.style.backgroundSize = 'cover';
                   e.currentTarget.style.border = '2px solid green';
-                  e.currentTarget.style.backgroundSize = '50px 50px'; 
-
+                  e.currentTarget.style.backgroundSize = '50px 50px';
                   e.currentTarget.style.backgroundRepeat = 'no-repeat';
                   e.currentTarget.style.backgroundPosition = 'center';
                 }}
@@ -70,10 +71,10 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                 }}
                 style={{
                   position: 'absolute',
-                  left: `${cut.x / scaleFactor}px`,   
-                  top: `${cut.y / scaleFactor}px`,   
-                  width: `${cut.width / scaleFactor}px`,   
-                  height: `${cut.height / scaleFactor}px`,  
+                  left: `${cut.x / scaleFactor}px`,
+                  top: `${cut.y / scaleFactor}px`,
+                  width: `${cut.width / scaleFactor}px`,
+                  height: `${cut.height / scaleFactor}px`,
                   backgroundColor: "rgba(255, 0, 0, 0.6)",
                   border: '1px solid black',
                   cursor: 'pointer',
