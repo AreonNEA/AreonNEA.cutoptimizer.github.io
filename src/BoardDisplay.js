@@ -75,7 +75,7 @@ function BoardDisplay({ boards, setBoards, setBoardCount, boardWidth, boardHeigh
                   top: `${cut.y / scaleFactor}px`,
                   width: `${cut.width / scaleFactor}px`,
                   height: `${cut.height / scaleFactor}px`,
-                  backgroundColor: "rgba(255, 0, 0, 0.6)",
+                  backgroundColor: 'rgba(0, 128, 0, 0.3)',
                   border: '1px solid black',
                   cursor: 'pointer',
                 }}

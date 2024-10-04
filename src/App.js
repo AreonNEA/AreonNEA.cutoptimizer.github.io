@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CutInput from './CutInput';
 import CutTable from './CutTable';
 import BoardDisplay from './BoardDisplay';
-import ImageSelector from './ImageSelector';
 import MobileView from './MobileView';
+import ImageSelector from './ImageSelector';
 import styles from './styles/App.module.css';
 import { translations } from './translations';
 
@@ -110,6 +110,7 @@ function App() {
       setIsMobile(window.innerWidth < 600);
     };
 
+    handleResize(); // Прямой вызов для начальной проверки
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -130,7 +131,7 @@ function App() {
             </select>
           </div>
           <div className={styles.center}>
-            <h1>{translations[language].calculate}</h1>
+            <h1>{translations[language]?.calculate || translations['en'].calculate}</h1>
 
             <CutInput
               onAdd={addCut}
@@ -139,16 +140,16 @@ function App() {
               setCurrentCut={setCurrentCut}
               boardWidth={boardWidth}
               boardHeight={boardHeight}
-              translations={translations[language]}
+              translations={translations[language] || translations['en']}
             />
             <CutTable
               cuts={cuts}
               onEdit={setCurrentCut}
               onDelete={deleteCut}
-              translations={translations[language]}
+              translations={translations[language] || translations['en']}
             />
             <button className={styles.button} onClick={placeCutsOnBoards}>
-              {translations[language].calculate}
+              {translations[language]?.calculate || translations['en'].calculate}
             </button>
             <BoardDisplay
               boards={boards}
@@ -161,7 +162,7 @@ function App() {
               boardCount={boardCount}
               totalCuts={totalCuts}
               setTotalCuts={setTotalCuts}
-              translations={translations[language]}
+              translations={translations[language] || translations['en']}
             />
           </div>
         </div>
